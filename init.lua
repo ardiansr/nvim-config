@@ -1,5 +1,6 @@
--- Global configurations
-require("options")
-
 -- Plugin installer
 require("config.lazy")
+
+-- Global configurations
+require("mappings")
+require("options")
