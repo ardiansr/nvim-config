@@ -4,7 +4,7 @@ return {
   priority = 1000,
   config = function()
     require("no-clown-fiesta").setup({
-      transparent = true,
+      transparent = false,
       styles = {
         comments = { italic = true }
       }
