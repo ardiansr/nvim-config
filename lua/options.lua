@@ -6,8 +6,8 @@ vim.o.clipboard = "unnamedplus"
 
 -- Default indentation settings
 vim.o.autoindent = true
-vim.bo.smartindent = true
-vim.bo.expandtab = true
+vim.opt.smartindent = true
+vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
