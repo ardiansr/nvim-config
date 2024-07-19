@@ -1,5 +1,41 @@
 return {
   {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip"
+    },
+    config = function()
+      require("cmp").setup({
+        snippet = {
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+          end
+        },
+        window = {
+          completion = require("cmp").config.window.bordered(),
+          documentation = require("cmp").config.window.bordered()
+        },
+        mapping = require("cmp").mapping.preset.insert({
+          ["<C-b>"] = require("cmp").mapping.scroll_docs(-4),
+          ["<C-f>"] = require("cmp").mapping.scroll_docs(4),
+          ["<C-Space>"] = require("cmp").mapping.complete(),
+          ["<C-e>"] = require("cmp").mapping.abort(),
+          ["<CR>"] = require("cmp").mapping.confirm({ select = true })
+        }),
+        sources = require("cmp").config.sources({
+          { name = "nvim_lsp" },
+          { name = "vsnip" }
+        }, {
+          { name = "buffer" }
+        })
+      })
+    end
+  },
+  {
     "neovim/nvim-lspconfig",
     config = function()
       local on_attach = function(_, bufnr)
@@ -30,11 +66,14 @@ return {
         vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
       end
 
-      local servers = { "pyright" }
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      local servers = { "pyright", "tsserver", "eslint" }
 
       for _, lsp in pairs(servers) do
         require("lspconfig")[lsp].setup({
-          on_attach = on_attach
+          on_attach = on_attach,
+          capabilities = capabilities
         })
       end
     end
