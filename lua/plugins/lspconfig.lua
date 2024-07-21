@@ -1,5 +1,11 @@
 return {
   {
+    "lukas-reineke/lsp-format.nvim",
+    config = function()
+      require("lsp-format").setup({ })
+    end
+  },
+  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
@@ -42,6 +48,8 @@ return {
         local function buf_set_option(...)
           vim.api.nvim_buf_set_option(bufnr, ...)
         end
+
+        require("lsp-format").on_attach(_, bufnr)
 
         buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
