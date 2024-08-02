@@ -12,6 +12,7 @@ return {
 
     vim.cmd([[
       colorscheme no-clown-fiesta
+      hi ColorColumn guibg=#202020
       hi LineNr gui=bold guifg=#e1e1e1
       hi LineNrAbove guifg=#373737
       hi LineNrBelow guifg=#373737
