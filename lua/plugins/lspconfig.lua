@@ -106,11 +106,25 @@ return {
       end
     end
   },
-
   {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup({ })
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "clangd",
+          "rust_analyzer",
+          "pyright",
+          "tsserver",
+          "eslint"
+        },
+        automatic_installation = true
+      })
     end
   }
 }
