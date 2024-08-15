@@ -7,6 +7,11 @@ return {
     end
   },
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true
+  },
+  {
     "lukas-reineke/lsp-format.nvim",
     config = function()
       require("lsp-format").setup({ })
@@ -104,6 +109,11 @@ return {
           capabilities = capabilities
         })
       end
+
+      require("lspconfig").cssls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities
+      })
     end
   },
   {
@@ -121,7 +131,8 @@ return {
           "rust_analyzer",
           "pyright",
           "tsserver",
-          "eslint"
+          "eslint",
+          "cssls"
         },
         automatic_installation = true
       })
